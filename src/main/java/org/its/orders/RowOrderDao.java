@@ -1,5 +1,7 @@
 package org.its.orders;
 
+import org.its.Entities.RowOrder;
+
 import java.util.List;
 import java.util.UUID;
 

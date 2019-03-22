@@ -1,6 +1,6 @@
 package org.its.events;
 
-import org.its.orders.Order;
+import org.its.Entities.Order;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,10 +1,6 @@
 package org.its.events;
 
-import org.its.orders.OrderDao;
 import org.its.bus.Bus;
-import org.its.orders.Order;
-
-import java.util.UUID;
 
 public class EventHandler {
 

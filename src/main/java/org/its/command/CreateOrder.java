@@ -5,7 +5,7 @@ import org.its.bus.BusMessage;
 import java.util.UUID;
 
 public class CreateOrder implements BusMessage {
-    private UUID id;
+    private String id;
     private String nome;
     private String data;
 
@@ -13,17 +13,17 @@ public class CreateOrder implements BusMessage {
 
     }
 
-    public CreateOrder(UUID id, String nome, String data) {
+    public CreateOrder(String id, String nome, String data) {
+        this.id = id;
         this.nome = nome;
         this.data = data;
-        this.id = id;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

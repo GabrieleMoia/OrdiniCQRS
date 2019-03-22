@@ -1,19 +1,20 @@
-package org.its.orders;
+package org.its.Entities;
 
 import java.util.UUID;
 
 public class RowOrder {
-    private UUID idOrdine;
     private int idProgressivo;
     private String descrizione;
     private double valore;
 
-    public UUID getIdOrdine() {
-        return idOrdine;
+    public RowOrder(){
+
     }
 
-    public void setIdOrdine(UUID idOrdine) {
-        this.idOrdine = idOrdine;
+    public RowOrder(int idProgressivo, String descrizione, double valore) {
+        this.idProgressivo = idProgressivo;
+        this.descrizione = descrizione;
+        this.valore = valore;
     }
 
     public int getIdProgressivo() {

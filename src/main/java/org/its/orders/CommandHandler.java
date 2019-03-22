@@ -1,6 +1,8 @@
 package org.its.orders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.its.Entities.Order;
+import org.its.Entities.RowOrder;
 import org.its.bus.Bus;
 import org.its.command.CreateOrder;
 import org.its.command.CreateOrderRow;
@@ -11,6 +13,7 @@ import org.its.events.EventOrder;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 
@@ -35,36 +38,32 @@ public class CommandHandler {
     }
 
     private void handle(CreateOrderRow o) {
-        Order order = orderDao.getById(o.getIdOrdine());
+        Order order = orderDao.getById(UUID.fromString(o.getIdOrdine()));
 
-        RowOrder rowOrder = new RowOrder();
+        if(order.getOrderRows()==null){
+            order.setOrderRows(new ArrayList<RowOrder>());
+        }
+        int id = order.getOrderRows().size()+1;
 
-        rowOrder.setIdOrdine(o.getIdOrdine());
-        rowOrder.setDescrizione(o.getDescrizione());
-        rowOrder.setIdProgressivo(o.getProgressiveId());
-        rowOrder.setValore(o.getValore());
-
-        order.getOrderRows().add(rowOrder);
-        orderDao.save(order);
-
-        EventRowOrder eventRowOrder = new EventRowOrder();
-        eventRowOrder.setIdOrdine(rowOrder.getIdOrdine());
-        eventRowOrder.setValore(rowOrder.getValore());
-        eventRowOrder.setIdProgressivo(rowOrder.getIdProgressivo());
-        eventRowOrder.setDescrizione(rowOrder.getDescrizione());
+        RowOrder newRow = new RowOrder(id, o.getDescrizione(), o.getValore());
+        order.getOrderRows().add(newRow);
+        orderDao.update(order);
+        EventRowOrder eventRowOrder = new EventRowOrder(o.getIdOrdine(),id,o.getDescrizione(),o.getValore());
         bus.send(eventRowOrder);
     }
 
-    public UUID handle(CreateOrder o) throws Exception {
+    public void handle(CreateOrder o) throws Exception {
         Order order = new Order();
-        order.setId(o.getId());
+        order.setId(UUID.fromString(o.getId()));
         order.setNome(o.getNome());
         order.setData(o.getData());
+
+        orderDao.save(order);
+
         EventOrder eventOrder = new EventOrder();
         eventOrder.setOrderId(order.getId());
         eventOrder.setNome_richiedente(order.getNome());
         bus.send(eventOrder);
-        return orderDao.save(order);
     }
 
 }

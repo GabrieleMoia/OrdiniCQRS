@@ -1,6 +1,4 @@
-package org.its.orders;
-
-import org.its.Entities.Row;
+package org.its.Entities;
 
 import java.util.ArrayList;
 import java.util.List;

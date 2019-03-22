@@ -31,8 +31,10 @@ public class CommandController {
             method = RequestMethod.POST,
             produces = "application/json")
     @ResponseBody
-    public UUID createOrder(@RequestBody CreateOrder createOrder) throws Exception {
-        return commandHandler.handle(createOrder);
+    public String createOrder(@RequestBody CreateOrder createOrder) throws Exception {
+        createOrder.setId(UUID.randomUUID().toString());
+        bus.send(createOrder);
+        return createOrder.getId();
     }
 
     @RequestMapping(
@@ -40,7 +42,8 @@ public class CommandController {
             method = RequestMethod.POST,
             produces = "application/json")
     @ResponseBody
-    public void createOrderRow(@RequestBody CreateOrderRow createOrderRow) throws Exception {
+    public String createOrderRow(@RequestBody CreateOrderRow createOrderRow) throws Exception {
         bus.send(createOrderRow);
+        return createOrderRow.getIdOrdine();
     }
 }

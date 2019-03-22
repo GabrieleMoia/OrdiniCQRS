@@ -1,7 +1,5 @@
 package org.its.mongo;
 
-import org.its.Entities.Orders;
-import org.its.Entities.Row;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.ServerAddress;
@@ -10,7 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
-import org.its.orders.Order;
+import org.its.Entities.Order;
 
 import javax.inject.Named;
 
@@ -36,7 +34,6 @@ public class MongoHelper {
         database = mongoClient.getDatabase("myDb");
 
         MongoCollection<Order> orders = database.getCollection("orders", Order.class);
-        //MongoCollection<Row> rows = database.getCollection("rows", Row.class);
     }
 
     public void tearDown() {
