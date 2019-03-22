@@ -5,32 +5,36 @@ import org.its.bus.BusMessage;
 import java.util.UUID;
 
 public class EventRowOrder implements BusMessage {
-    private String idOrdine;
-    private int idProgressivo;
+    private UUID idOrdine;
+    private int id;
     private String descrizione;
-    private double valore;
+    private double amount;
 
-    public EventRowOrder(String idOrdine, int idProgressivo, String descrizione, double valore) {
-        this.idOrdine = idOrdine;
-        this.idProgressivo = idProgressivo;
-        this.descrizione = descrizione;
-        this.valore = valore;
+    public EventRowOrder() {
+
     }
 
-    public String getIdOrdine() {
+    public EventRowOrder(UUID idOrdine, int id, String descrizione, double amount) {
+        this.idOrdine = idOrdine;
+        this.id = id;
+        this.descrizione = descrizione;
+        this.amount = amount;
+    }
+
+    public UUID getIdOrdine() {
         return idOrdine;
     }
 
-    public void setIdOrdine(String idOrdine) {
+    public void setIdOrdine(UUID idOrdine) {
         this.idOrdine = idOrdine;
     }
 
-    public int getIdProgressivo() {
-        return idProgressivo;
+    public int getId() {
+        return id;
     }
 
-    public void setIdProgressivo(int idProgressivo) {
-        this.idProgressivo = idProgressivo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescrizione() {
@@ -41,11 +45,11 @@ public class EventRowOrder implements BusMessage {
         this.descrizione = descrizione;
     }
 
-    public double getValore() {
-        return valore;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setValore(double valore) {
-        this.valore = valore;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

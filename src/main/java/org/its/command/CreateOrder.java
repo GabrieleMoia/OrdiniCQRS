@@ -3,7 +3,7 @@ package org.its.command;
 import org.its.bus.BusMessage;
 
 import java.util.UUID;
-
+//comando per la creazione di un ordine
 public class CreateOrder implements BusMessage {
     private String id;
     private String nome;

@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public class CreateOrderRow implements BusMessage{
     private String idOrdine;
+    private int id;
     private String descrizione;
     private double valore;
 
@@ -14,7 +15,7 @@ public class CreateOrderRow implements BusMessage{
 
     }
 
-    public CreateOrderRow(String idOrdine, String descrizione, double valore) {
+    public CreateOrderRow(String idOrdine, int id, String descrizione, double valore) {
         this.idOrdine = idOrdine;
         this.descrizione = descrizione;
         this.valore = valore;

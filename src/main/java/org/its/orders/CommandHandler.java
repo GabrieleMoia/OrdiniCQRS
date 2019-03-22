@@ -6,9 +6,9 @@ import org.its.Entities.RowOrder;
 import org.its.bus.Bus;
 import org.its.command.CreateOrder;
 import org.its.command.CreateOrderRow;
+import org.its.events.EventOrder;
 import org.its.events.EventRowOrder;
 import org.springframework.stereotype.Component;
-import org.its.events.EventOrder;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -48,8 +48,19 @@ public class CommandHandler {
         RowOrder newRow = new RowOrder(id, o.getDescrizione(), o.getValore());
         order.getOrderRows().add(newRow);
         orderDao.update(order);
-        EventRowOrder eventRowOrder = new EventRowOrder(o.getIdOrdine(),id,o.getDescrizione(),o.getValore());
+
+        EventRowOrder eventRowOrder = new EventRowOrder(UUID.fromString(o.getIdOrdine()),id,o.getDescrizione(),o.getValore());
         bus.send(eventRowOrder);
+        /*OrderAmountById orderAmountById = new OrderAmountById();
+        orderAmountById.setId(order.getId());
+        orderAmountById.setAmount(o.getValore());
+        bus.send(orderAmountById);
+
+        OrderByName orderByName = new OrderByName();
+        orderByName.setName(order.getNome());
+        orderByName.setCount(1);
+        bus.send(orderByName);*/
+
     }
 
     public void handle(CreateOrder o) throws Exception {
@@ -61,9 +72,19 @@ public class CommandHandler {
         orderDao.save(order);
 
         EventOrder eventOrder = new EventOrder();
-        eventOrder.setOrderId(order.getId());
-        eventOrder.setNome_richiedente(order.getNome());
+        eventOrder.setId(order.getId());
+        eventOrder.setNome(order.getNome());
+        eventOrder.setData(order.getData());
         bus.send(eventOrder);
+        /*OrderAmountById orderAmountById = new OrderAmountById();
+        orderAmountById.setId(order.getId());
+        orderAmountById.setAmount(0.0);
+        bus.send(orderAmountById);
+
+        OrderByName orderByName = new OrderByName();
+        orderByName.setName(order.getNome());
+        orderByName.setCount(0);
+        bus.send(orderByName);*/
     }
 
 }

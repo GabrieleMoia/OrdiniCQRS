@@ -7,10 +7,6 @@ public class RowOrder {
     private String descrizione;
     private double valore;
 
-    public RowOrder(){
-
-    }
-
     public RowOrder(int idProgressivo, String descrizione, double valore) {
         this.idProgressivo = idProgressivo;
         this.descrizione = descrizione;
