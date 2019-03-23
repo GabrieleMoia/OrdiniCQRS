@@ -1,4 +1,4 @@
-package org.its.orders;
+package org.its.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.its.Entities.Order;
@@ -6,6 +6,7 @@ import org.its.Entities.RowOrder;
 import org.its.bus.Bus;
 import org.its.command.CreateOrder;
 import org.its.command.CreateOrderRow;
+import org.its.command.dao.OrderDao;
 import org.its.events.EventRowOrder;
 import org.springframework.stereotype.Component;
 import org.its.events.EventOrder;
@@ -61,8 +62,8 @@ public class CommandHandler {
         orderDao.save(order);
 
         EventOrder eventOrder = new EventOrder();
-        eventOrder.setOrderId(order.getId());
-        eventOrder.setNome_richiedente(order.getNome());
+        eventOrder.setId(order.getId());
+        eventOrder.setName(order.getNome());
         bus.send(eventOrder);
     }
 

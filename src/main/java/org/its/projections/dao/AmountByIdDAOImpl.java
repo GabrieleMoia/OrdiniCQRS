@@ -1,4 +1,4 @@
-package org.its.orders;
+package org.its.projections.dao;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
@@ -8,7 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.its.Entities.Order;
-import org.springframework.stereotype.Component;
+import org.its.projections.AmountById;
 
 import javax.inject.Named;
 import java.util.List;
@@ -18,15 +18,14 @@ import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-@Named("orderDao")
-@Component
-public class OrderDaoImpl implements OrderDao {
+@Named("AmountByIdDAOImpl")
+public class AmountByIdDAOImpl implements AmountByIdDAO {
 
     private MongoClient mongoClient;
     private MongoDatabase database;
     private static CodecRegistry pojoCodecRegistry;
 
-    public OrderDaoImpl() {
+    public AmountByIdDAOImpl() {
         pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
         mongoClient = new MongoClient(new ServerAddress("localhost", 27017),
@@ -35,21 +34,25 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void save(Order order) {
-        MongoCollection<Order> orders = database.getCollection("orders", Order.class);
-        orders.insertOne(order);
+    public void save(AmountById amount) {
+        MongoCollection<AmountById> orders = database.getCollection("amountById", AmountById.class);
+        orders.insertOne(amount);
     }
 
     @Override
-    public Order getById(UUID id) {
+    public void update(AmountById amount) {
+        MongoCollection<AmountById> orders = database.getCollection("amountById", AmountById.class);
+        AmountById order = (AmountById) orders.find(eq("idOrdine", amount.getIdOrdine())).first();
+        order.setAmount(
+                order.getAmount()+amount.getAmount()
+        );
+        orders.replaceOne(eq("idOrdine", amount.getIdOrdine()), order);
+    }
+
+    @Override
+    public List<Order> getById(UUID id) {
         MongoCollection<Order> orders = database.getCollection("orders", Order.class);
-        Order order = orders.find(eq("_id", id)).first();
+        List<Order> order = (List<Order>) orders.find(eq("id", id));
         return order;
-    }
-
-    @Override
-    public void update(Order order) {
-        MongoCollection<Order> orders = database.getCollection("orders", Order.class);
-        orders.replaceOne(eq("_id", order.getId()), order);
     }
 }

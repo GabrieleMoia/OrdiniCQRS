@@ -2,25 +2,45 @@ package org.its.events;
 
 import org.its.bus.BusMessage;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class EventOrder implements BusMessage {
-    private UUID orderId;
-    private String nome_richiedente;
+    private UUID id;
+    private String name;
+    private Date date;
 
-    public UUID getOrderId() {
-        return orderId;
+    public EventOrder() {
+
     }
 
-    public void setOrderId(UUID orderId) {
-        this.orderId = orderId;
+    public EventOrder(UUID id, String name, Date date) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
     }
 
-    public String getNome_richiedente() {
-        return nome_richiedente;
+    public UUID getId() {
+        return id;
     }
 
-    public void setNome_richiedente(String nome_richiedente) {
-        this.nome_richiedente = nome_richiedente;
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

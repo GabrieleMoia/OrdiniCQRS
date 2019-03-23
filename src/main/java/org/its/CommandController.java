@@ -1,10 +1,9 @@
 package org.its;
 
 import org.its.bus.Bus;
-import org.its.bus.BusMessage;
 import org.its.command.CreateOrder;
 import org.its.command.CreateOrderRow;
-import org.its.orders.CommandHandler;
+import org.its.command.CommandHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

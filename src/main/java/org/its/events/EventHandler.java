@@ -1,11 +1,12 @@
 package org.its.events;
 
 import org.its.bus.Bus;
+import org.its.projections.dao.AmountByIdDAO;
 
 public class EventHandler {
 
     public EventHandler(
-            OrderEventDao dao,
+            AmountByIdDAO dao,
             Bus bus) {
         this.dao = dao;
         this.bus = bus;
@@ -17,6 +18,6 @@ public class EventHandler {
         return 0;
     }
 
-    private final OrderEventDao dao;
+    private final AmountByIdDAO dao;
     private final Bus bus;
 }

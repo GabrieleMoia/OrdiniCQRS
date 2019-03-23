@@ -1,4 +1,4 @@
-package org.its.events;
+package org.its.command.dao;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
@@ -8,21 +8,24 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.its.Entities.Order;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+import javax.inject.Named;
 import java.util.UUID;
 
 import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class OrderEventDaoImpl implements OrderEventDao {
+@Named("orderDao")
+@Component
+public class OrderDaoImpl implements OrderDao {
 
     private MongoClient mongoClient;
     private MongoDatabase database;
     private static CodecRegistry pojoCodecRegistry;
 
-    public OrderEventDaoImpl() {
+    public OrderDaoImpl() {
         pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
         mongoClient = new MongoClient(new ServerAddress("localhost", 27017),
@@ -31,14 +34,21 @@ public class OrderEventDaoImpl implements OrderEventDao {
     }
 
     @Override
-    public UUID save(EventOrder eventOrder) {
-        return null;
+    public void save(Order order) {
+        MongoCollection<Order> orders = database.getCollection("orders", Order.class);
+        orders.insertOne(order);
     }
 
     @Override
-    public List<Order> getById(UUID id) {
+    public Order getById(UUID id) {
         MongoCollection<Order> orders = database.getCollection("orders", Order.class);
-        List<Order> order = (List<Order>) orders.find(eq("id", id));
+        Order order = orders.find(eq("_id", id)).first();
         return order;
+    }
+
+    @Override
+    public void update(Order order) {
+        MongoCollection<Order> orders = database.getCollection("orders", Order.class);
+        orders.replaceOne(eq("_id", order.getId()), order);
     }
 }

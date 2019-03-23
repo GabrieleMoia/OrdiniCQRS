@@ -1,4 +1,4 @@
-package org.its.orders;
+package org.its.command.dao;
 
 import org.its.Entities.Order;
 
