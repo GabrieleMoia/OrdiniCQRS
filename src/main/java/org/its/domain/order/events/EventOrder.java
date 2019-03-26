@@ -1,4 +1,4 @@
-package org.its.events;
+package org.its.domain.order.events;
 
 import org.its.bus.BusMessage;
 

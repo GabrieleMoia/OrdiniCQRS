@@ -1,27 +1,31 @@
-package org.its.events;
+package org.its.domain.order.events;
 
 import org.its.bus.BusMessage;
 
 import java.util.UUID;
 
 public class EventRowOrder implements BusMessage {
-    private String idOrdine;
+    private UUID idOrdine;
     private int idProgressivo;
     private String descrizione;
     private double valore;
 
-    public EventRowOrder(String idOrdine, int idProgressivo, String descrizione, double valore) {
+    public EventRowOrder(UUID idOrdine, int idProgressivo, String descrizione, double valore) {
         this.idOrdine = idOrdine;
         this.idProgressivo = idProgressivo;
         this.descrizione = descrizione;
         this.valore = valore;
     }
 
-    public String getIdOrdine() {
+    public EventRowOrder() {
+
+    }
+
+    public UUID getIdOrdine() {
         return idOrdine;
     }
 
-    public void setIdOrdine(String idOrdine) {
+    public void setIdOrdine(UUID idOrdine) {
         this.idOrdine = idOrdine;
     }
 

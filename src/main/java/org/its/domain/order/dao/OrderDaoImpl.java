@@ -1,4 +1,4 @@
-package org.its.projections.dao;
+package org.its.domain.order.dao;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
@@ -8,7 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.its.Entities.Order;
-import org.its.projections.CountByName;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Named;
 import java.util.UUID;
@@ -17,14 +17,15 @@ import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-@Named("CountByNameDAOImpl")
-public class CountByNameDAOImpl implements CountByNameDAO {
+@Named("orderDao")
+@Component
+public class OrderDaoImpl implements OrderDao {
 
     private MongoClient mongoClient;
     private MongoDatabase database;
     private static CodecRegistry pojoCodecRegistry;
 
-    public CountByNameDAOImpl() {
+    public OrderDaoImpl() {
         pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
         mongoClient = new MongoClient(new ServerAddress("localhost", 27017),
@@ -33,25 +34,21 @@ public class CountByNameDAOImpl implements CountByNameDAO {
     }
 
     @Override
-    public void save(CountByName orderNumberByName) {
-        MongoCollection<CountByName> orders = database.getCollection("countByName", CountByName.class);
-        orders.insertOne(orderNumberByName);
+    public void save(Order order) {
+        MongoCollection<Order> orders = database.getCollection("orders", Order.class);
+        orders.insertOne(order);
     }
 
     @Override
-    public Order getOrderById(UUID uuid) {
+    public Order getById(UUID id) {
         MongoCollection<Order> orders = database.getCollection("orders", Order.class);
-        Order order = (Order) orders.find(eq("_id", uuid)).first();
+        Order order = orders.find(eq("_id", id)).first();
         return order;
     }
 
     @Override
-    public void update(CountByName orderNumberByName) {
-        MongoCollection<CountByName> orders = database.getCollection("countByName", CountByName.class);
-        CountByName order = (CountByName) orders.find(eq("nome", orderNumberByName.getNome())).first();
-        order.setCount(
-                order.getCount() + orderNumberByName.getCount()
-        );
-        orders.replaceOne(eq("nome", orderNumberByName.getNome()), order);
+    public void update(Order order) {
+        MongoCollection<Order> orders = database.getCollection("orders", Order.class);
+        orders.replaceOne(eq("_id", order.getId()), order);
     }
 }

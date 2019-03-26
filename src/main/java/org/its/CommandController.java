@@ -1,9 +1,10 @@
 package org.its;
 
 import org.its.bus.Bus;
-import org.its.command.CreateOrder;
-import org.its.command.CreateOrderRow;
-import org.its.command.CommandHandler;
+import org.its.domain.Good.command.AddGood;
+import org.its.domain.Good.command.ReserveGood;
+import org.its.domain.order.command.CreateOrder;
+import org.its.domain.order.command.CreateOrderRow;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,19 +15,17 @@ import javax.inject.Named;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/api/ordine")
+@RequestMapping("/api")
 public class CommandController {
 
     private final Bus bus;
-    private final CommandHandler commandHandler;
 
-    public CommandController(@Named("bus") Bus bus, @Named("CommandHandler") CommandHandler commandHandler) {
+    public CommandController(@Named("bus") Bus bus) {
         this.bus = bus;
-        this.commandHandler = commandHandler;
     }
 
     @RequestMapping(
-            path = "/insertOrdine",
+            path = "/ordine/insertOrdine",
             method = RequestMethod.POST,
             produces = "application/json")
     @ResponseBody
@@ -37,12 +36,32 @@ public class CommandController {
     }
 
     @RequestMapping(
-            path = "/insertRow",
+            path = "/ordine/insertRow",
             method = RequestMethod.POST,
             produces = "application/json")
     @ResponseBody
     public String createOrderRow(@RequestBody CreateOrderRow createOrderRow) throws Exception {
         bus.send(createOrderRow);
-        return createOrderRow.getIdOrdine();
+        return createOrderRow.getIdOrdine().toString();
+    }
+
+    @RequestMapping(
+            path = "merce/insertGoods",
+            method = RequestMethod.POST,
+            produces = "application/json")
+    @ResponseBody
+    public String insertGoods(@RequestBody AddGood good) throws Exception {
+        bus.send(good);
+        return good.getDescription();
+    }
+
+    @RequestMapping(
+            path = "merce/reserveGoods",
+            method = RequestMethod.POST,
+            produces = "application/json")
+    @ResponseBody
+    public String reserveGoods(@RequestBody ReserveGood good) throws Exception {
+        bus.send(good);
+        return good.getDescription();
     }
 }

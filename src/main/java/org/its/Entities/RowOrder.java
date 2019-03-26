@@ -1,12 +1,10 @@
 package org.its.Entities;
 
-import java.util.UUID;
-
 public class RowOrder {
     private int idProgressivo;
     private String descrizione;
     private double valore;
-
+    private boolean reserved;
     public RowOrder(){
 
     }
@@ -39,5 +37,13 @@ public class RowOrder {
 
     public void setValore(double valore) {
         this.valore = valore;
+    }
+
+    public boolean isReserved() {
+        return reserved;
+    }
+
+    public void setReserved(boolean reserved) {
+        this.reserved = reserved;
     }
 }

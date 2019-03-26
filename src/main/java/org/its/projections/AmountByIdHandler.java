@@ -1,12 +1,11 @@
 package org.its.projections;
 
 import org.its.bus.Bus;
-import org.its.events.EventOrder;
-import org.its.events.EventRowOrder;
+import org.its.domain.order.events.EventOrder;
+import org.its.domain.order.events.EventRowOrder;
 import org.its.projections.dao.AmountByIdDAO;
 
 import javax.inject.Named;
-import java.util.UUID;
 
 @Named("AmountByIdHandler")
 public class AmountByIdHandler {
@@ -25,7 +24,7 @@ public class AmountByIdHandler {
 
     private void handle(EventRowOrder o) {
         AmountById amountById = new AmountById();
-        amountById.setIdOrdine(UUID.fromString(o.getIdOrdine()));
+        amountById.setIdOrdine(o.getIdOrdine());
         amountById.setAmount(o.getValore());
         dao.update(amountById);
     }

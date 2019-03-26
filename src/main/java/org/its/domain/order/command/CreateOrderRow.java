@@ -1,12 +1,11 @@
-package org.its.command;
+package org.its.domain.order.command;
 
-import org.its.bus.Bus;
 import org.its.bus.BusMessage;
 
 import java.util.UUID;
 
 public class CreateOrderRow implements BusMessage{
-    private String idOrdine;
+    private UUID idOrdine;
     private String descrizione;
     private double valore;
 
@@ -14,13 +13,13 @@ public class CreateOrderRow implements BusMessage{
 
     }
 
-    public CreateOrderRow(String idOrdine, String descrizione, double valore) {
+    public CreateOrderRow(UUID idOrdine, String descrizione, double valore) {
         this.idOrdine = idOrdine;
         this.descrizione = descrizione;
         this.valore = valore;
     }
 
-    public String getIdOrdine() {
+    public UUID getIdOrdine() {
         return idOrdine;
     }
 
@@ -30,5 +29,17 @@ public class CreateOrderRow implements BusMessage{
 
     public double getValore() {
         return valore;
+    }
+
+    public void setIdOrdine(UUID idOrdine) {
+        this.idOrdine = idOrdine;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public void setValore(double valore) {
+        this.valore = valore;
     }
 }

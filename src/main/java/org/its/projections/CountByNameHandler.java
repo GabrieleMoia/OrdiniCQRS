@@ -2,12 +2,11 @@ package org.its.projections;
 
 import org.its.Entities.Order;
 import org.its.bus.Bus;
-import org.its.events.EventOrder;
-import org.its.events.EventRowOrder;
+import org.its.domain.order.events.EventOrder;
+import org.its.domain.order.events.EventRowOrder;
 import org.its.projections.dao.CountByNameDAO;
 
 import javax.inject.Named;
-import java.util.UUID;
 
 @Named("CountByNameHandler")
 public class CountByNameHandler {
@@ -24,7 +23,7 @@ public class CountByNameHandler {
 
     private void handle(EventRowOrder o) {
         CountByName orderNumberByName = new CountByName();
-        Order order = dao.getOrderById(UUID.fromString(o.getIdOrdine()));
+        Order order = dao.getOrderById(o.getIdOrdine());
         orderNumberByName.setNome(order.getNome());
         orderNumberByName.setCount(1);
         dao.update(orderNumberByName);

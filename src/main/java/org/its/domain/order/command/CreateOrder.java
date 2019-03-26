@@ -1,8 +1,6 @@
-package org.its.command;
+package org.its.domain.order.command;
 
 import org.its.bus.BusMessage;
-
-import java.util.UUID;
 
 public class CreateOrder implements BusMessage {
     private String id;

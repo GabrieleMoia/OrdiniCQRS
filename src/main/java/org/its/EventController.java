@@ -9,6 +9,7 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.its.projections.AmountById;
 import org.its.projections.CountByName;
+import org.its.projections.GoodCount;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,5 +56,15 @@ public class EventController {
     public CountByName getNumberOfOrdersByID(@PathVariable("nome") String nome) {
         MongoCollection<CountByName> data = database.getCollection("countByName", CountByName.class);
         return data.find(eq("nome", nome)).first();
+    }
+
+    @RequestMapping(
+            path = "/{nome}/getGoodCount",
+            method = RequestMethod.GET,
+            produces = "application/json")
+    @ResponseBody
+    public GoodCount getGoodCount(@PathVariable("nome") String nome) {
+        MongoCollection<GoodCount> data = database.getCollection("goodCount", GoodCount.class);
+        return data.find(eq("descrizione", nome)).first();
     }
 }
