@@ -8,4 +8,5 @@ public interface OrderDao {
     void save(Order order);
     Order getById(UUID id);
     void update(Order order);
+    void deleteRow(Order order, int rowId);
 }

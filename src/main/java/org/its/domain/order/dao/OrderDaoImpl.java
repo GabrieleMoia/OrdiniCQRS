@@ -51,4 +51,12 @@ public class OrderDaoImpl implements OrderDao {
         MongoCollection<Order> orders = database.getCollection("orders", Order.class);
         orders.replaceOne(eq("_id", order.getId()), order);
     }
+
+    @Override
+    public void deleteRow(Order order, int rowId) {
+        MongoCollection<Order> orders = database.getCollection("orders", Order.class);
+        Order orderFound = orders.find(eq("_id", order.getId())).first();
+        orderFound.getOrderRows().remove(rowId);
+        orders.replaceOne(eq("_id", order.getId()), orderFound);
+    }
 }

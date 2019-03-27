@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.its.Entities.Good;
 import org.its.bus.Bus;
 import org.its.domain.Good.dao.GoodDao;
-import org.its.domain.Good.events.GoodAdded;
 import org.its.domain.Good.events.GoodReserved;
 import org.springframework.stereotype.Component;
 
@@ -29,15 +28,21 @@ public class CommandHandler {
                 (o) -> handle((ReserveGood) o));
     }
 
-    private void handle(ReserveGood o) {
-        Good oldGood = goodDao.getById(o.getDescription());
+    private void handle(ReserveGood o) throws Exception {
+        Good good = goodDao.getById(o.getDescription());
         boolean checked = false;
-
-        if(oldGood.getQuantità() > 0){
-            oldGood.setQuantità(oldGood.getQuantità() -1);
-            goodDao.update(oldGood);
-            checked = true;
+        if(good != null) {
+            if (good.getQuantità() > 0) {
+                good.setQuantità(good.getQuantità() - 1);
+                goodDao.update(good);
+                checked = true;
+            } else {
+                GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
+            }
+        }else{
+            GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
         }
+        //quando blocco una merce, richiamo l'evento sul blocco delle merci. In ascolto c'è l'istanza sul event handler
         GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
         bus.send(reserved);
     }
@@ -55,7 +60,5 @@ public class CommandHandler {
             good.setQuantità(o.getQuantity() + oldGood.getQuantità());
             goodDao.update(good);
         }
-        GoodAdded goodAdded = new GoodAdded(good.getDescrizione(), good.getQuantità());
-        bus.send(goodAdded);
     }
 }
