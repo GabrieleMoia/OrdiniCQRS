@@ -9,23 +9,26 @@ import java.util.List;
 @Named("bus")
 public class BusImpl implements Bus {
     public <T> void register(Class<T> clazz, MessageConsumer consumer) {
-        if(!consumers.containsKey(clazz)){
+        if (!consumers.containsKey(clazz)) {
             consumers.put(clazz, new ArrayList<>());
         }
-        consumers.get(clazz).add(o->consumer.handle(o));
+        consumers.get(clazz).add(o -> consumer.handle(o));
     }
-    public void send(BusMessage message) {
-        if(!consumers.containsKey(message.getClass()))return;
+
+    public void send(BusMessage message) throws Exception {
+        if (!consumers.containsKey(message.getClass())) return;
         List<MessageConsumer> result = consumers.get(message.getClass());
-        for(MessageConsumer consumer:result){
-            try{
+        for (MessageConsumer consumer : result) {
+            try {
                 consumer.handle(message);
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 System.out.println(ex);
+                throw new Exception(ex);
             }
         }
     }
-    private HashMap<Class,List<MessageConsumer>> consumers =
+
+    private HashMap<Class, List<MessageConsumer>> consumers =
             new HashMap<Class, List<MessageConsumer>>();
 
 }

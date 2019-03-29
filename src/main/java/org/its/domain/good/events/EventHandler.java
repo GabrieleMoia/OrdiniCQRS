@@ -28,7 +28,7 @@ public class EventHandler {
     }
 
     //Evento che deriva dalla chiamata del command delle merci. Setto la riga corretta su db a true. Come se l'ordine fosse stato sccetatto
-    private void handle(GoodReserved o) {
+    private void handle(GoodReserved o) throws Exception {
         Order order = orderDao.getById(o.getOrderId());
         if (o.isChecked()) {
             RowOrder rowOrder = order.getOrderRows().get(o.getRowId());
@@ -48,3 +48,4 @@ public class EventHandler {
         }
     }
 }
+

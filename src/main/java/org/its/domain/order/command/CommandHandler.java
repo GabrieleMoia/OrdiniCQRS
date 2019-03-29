@@ -35,7 +35,7 @@ public class CommandHandler {
                 (o) -> handle((CreateOrderRow) o));
     }
 
-    private void handle(CreateOrderRow o) {
+    private void handle(CreateOrderRow o) throws Exception {
         Order order = orderDao.getById(o.getIdOrdine());
         int id;
         if (order.getOrderRows().size() == 0) {

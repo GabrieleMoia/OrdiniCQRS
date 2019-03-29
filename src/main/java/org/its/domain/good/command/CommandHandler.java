@@ -2,6 +2,7 @@ package org.its.domain.good.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.its.Entities.Good;
+import org.its.EventController;
 import org.its.bus.Bus;
 import org.its.domain.good.dao.GoodDao;
 import org.its.domain.good.events.GoodReserved;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 @Named("GoodCommandHandler")
 @Component
@@ -29,18 +31,28 @@ public class CommandHandler {
     }
 
     private void handle(ReserveGood o) throws Exception {
-        Good good = goodDao.getById(o.getDescription());
-        boolean checked = false;
-        if (good != null) {
-            if (good.getQuantità() > 0) {
-                good.setQuantità(good.getQuantità() - 1);
-                goodDao.update(good);
-                checked = true;
+        EventController controller = new EventController();
+        List<Good> goods = controller.getGoods();
+        if (!goods.isEmpty()) {
+            Good good = goodDao.getById(o.getDescription());
+            boolean checked = false;
+            if (good != null) {
+                if (good.getQuantità() > 0) {
+                    good.setQuantità(good.getQuantità() - 1);
+                    goodDao.update(good);
+                    checked = true;
+                } else {
+                    throw new Exception("Merce non disponibile");
+                }
+            } else {
+                throw new Exception("Merce non disponibile");
             }
+            //quando blocco una merce, richiamo l'evento sul blocco delle merci. In ascolto c'è l'istanza sul event handler
+            GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
+            bus.send(reserved);
+        } else {
+            throw new Exception("Merce non disponibile");
         }
-        //quando blocco una merce, richiamo l'evento sul blocco delle merci. In ascolto c'è l'istanza sul event handler
-        GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
-        bus.send(reserved);
     }
 
     private void handle(AddGood o) {
