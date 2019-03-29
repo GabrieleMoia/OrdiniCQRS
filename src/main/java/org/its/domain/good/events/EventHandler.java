@@ -1,4 +1,4 @@
-package org.its.domain.Good.events;
+package org.its.domain.good.events;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.its.Entities.Order;
@@ -6,6 +6,7 @@ import org.its.Entities.RowOrder;
 import org.its.bus.Bus;
 import org.its.domain.order.dao.OrderDao;
 import org.its.domain.order.events.EventRowOrder;
+import org.its.projections.GoodNotAvailable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -40,8 +41,10 @@ public class EventHandler {
             orderDao.update(order);
             EventRowOrder eventRowOrder = new EventRowOrder(o.getOrderId(), o.getRowId(), o.getDescription(), rowOrder.getValore());
             bus.send(eventRowOrder);
-        }else{
+        } else {
             orderDao.deleteRow(order, o.getRowId());
+            GoodNotAvailable GoodNotAvailable = new GoodNotAvailable(o.getDescription(), 1);
+            bus.send(GoodNotAvailable);
         }
     }
 }

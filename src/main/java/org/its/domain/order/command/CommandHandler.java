@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.its.Entities.Order;
 import org.its.Entities.RowOrder;
 import org.its.bus.Bus;
-import org.its.domain.Good.command.ReserveGood;
+import org.its.domain.good.command.ReserveGood;
 import org.its.domain.order.dao.OrderDao;
 import org.its.domain.order.events.EventOrder;
 import org.springframework.stereotype.Component;
@@ -50,8 +50,6 @@ public class CommandHandler {
         orderDao.update(order);
         ReserveGood reserveGood = new ReserveGood(id, o.getIdOrdine(),o.getDescrizione());
         bus.send(reserveGood);
-        /*EventRowOrder eventRowOrder = new EventRowOrder(o.getIdOrdine(), id, o.getDescrizione(), o.getValore());
-        bus.send(eventRowOrder);*/
     }
 
     public void handle(CreateOrder o) throws Exception {

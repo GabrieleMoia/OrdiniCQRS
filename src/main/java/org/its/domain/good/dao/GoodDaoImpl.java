@@ -1,4 +1,4 @@
-package org.its.domain.Good.dao;
+package org.its.domain.good.dao;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;

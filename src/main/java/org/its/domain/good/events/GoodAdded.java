@@ -1,4 +1,4 @@
-package org.its.domain.Good.events;
+package org.its.domain.good.events;
 
 import org.its.bus.BusMessage;
 

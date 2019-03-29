@@ -1,8 +1,8 @@
 package org.its;
 
 import org.its.bus.Bus;
-import org.its.domain.Good.command.AddGood;
-import org.its.domain.Good.command.ReserveGood;
+import org.its.domain.good.command.AddGood;
+import org.its.domain.good.command.ReserveGood;
 import org.its.domain.order.command.CreateOrder;
 import org.its.domain.order.command.CreateOrderRow;
 import org.springframework.stereotype.Controller;

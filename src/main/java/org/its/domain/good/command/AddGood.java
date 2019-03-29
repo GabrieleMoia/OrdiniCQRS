@@ -1,4 +1,4 @@
-package org.its.domain.Good.command;
+package org.its.domain.good.command;
 
 import org.its.bus.BusMessage;
 

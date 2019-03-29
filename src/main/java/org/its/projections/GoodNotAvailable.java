@@ -1,14 +1,16 @@
 package org.its.projections;
 
-public class GoodCount {
+import org.its.bus.BusMessage;
+
+public class GoodNotAvailable implements BusMessage {
     private String descrizione;
     private long quantity;
 
-    public GoodCount(){
+    public GoodNotAvailable(){
 
     }
 
-    public GoodCount(String descrizione, long quantity) {
+    public GoodNotAvailable(String descrizione, long quantity) {
         this.descrizione = descrizione;
         this.quantity = quantity;
     }

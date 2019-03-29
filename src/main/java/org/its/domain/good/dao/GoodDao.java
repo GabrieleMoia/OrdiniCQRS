@@ -1,4 +1,4 @@
-package org.its.domain.Good.dao;
+package org.its.domain.good.dao;
 
 import org.its.Entities.Good;
 

@@ -1,10 +1,9 @@
 package org.its.projections.dao;
 
-import org.its.Entities.Good;
-import org.its.projections.GoodCount;
+import org.its.projections.GoodNotAvailable;
 
 public interface GoodsCountDao {
-    void save(GoodCount count);
-    Good getByName(String descrizione);
-    void update(GoodCount count);
+    void save(GoodNotAvailable count);
+    GoodNotAvailable getByName(String descrizione);
+    void update(GoodNotAvailable count);
 }

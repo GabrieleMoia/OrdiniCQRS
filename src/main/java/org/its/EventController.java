@@ -9,13 +9,15 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.its.projections.AmountById;
 import org.its.projections.CountByName;
-import org.its.projections.GoodCount;
+import org.its.projections.GoodNotAvailable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -59,12 +61,15 @@ public class EventController {
     }
 
     @RequestMapping(
-            path = "/{nome}/getGoodCount",
+            path = "/getGoodNotAvailable",
             method = RequestMethod.GET,
             produces = "application/json")
     @ResponseBody
-    public GoodCount getGoodCount(@PathVariable("nome") String nome) {
-        MongoCollection<GoodCount> data = database.getCollection("goodCount", GoodCount.class);
-        return data.find(eq("descrizione", nome)).first();
+    public List<GoodNotAvailable> getGoodNotAvailable() {
+        List<GoodNotAvailable> result = new ArrayList<>();
+        MongoCollection<GoodNotAvailable> data = database.getCollection("goodsNotAvailable", GoodNotAvailable.class);
+        List<GoodNotAvailable> goods = (List<GoodNotAvailable>) data.find().into(new ArrayList<GoodNotAvailable>());
+        result.addAll(goods);
+        return result;
     }
 }

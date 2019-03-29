@@ -1,10 +1,10 @@
-package org.its.domain.Good.command;
+package org.its.domain.good.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.its.Entities.Good;
 import org.its.bus.Bus;
-import org.its.domain.Good.dao.GoodDao;
-import org.its.domain.Good.events.GoodReserved;
+import org.its.domain.good.dao.GoodDao;
+import org.its.domain.good.events.GoodReserved;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -31,16 +31,12 @@ public class CommandHandler {
     private void handle(ReserveGood o) throws Exception {
         Good good = goodDao.getById(o.getDescription());
         boolean checked = false;
-        if(good != null) {
+        if (good != null) {
             if (good.getQuantità() > 0) {
                 good.setQuantità(good.getQuantità() - 1);
                 goodDao.update(good);
                 checked = true;
-            } else {
-                GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
             }
-        }else{
-            GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
         }
         //quando blocco una merce, richiamo l'evento sul blocco delle merci. In ascolto c'è l'istanza sul event handler
         GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
