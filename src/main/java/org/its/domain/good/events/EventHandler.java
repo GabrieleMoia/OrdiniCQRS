@@ -43,8 +43,9 @@ public class EventHandler {
             bus.send(eventRowOrder);
         } else {
             orderDao.deleteRow(order, o.getRowId());
-            GoodNotAvailable GoodNotAvailable = new GoodNotAvailable(o.getDescription(), 1);
+            GoodNotAvailable GoodNotAvailable = new GoodNotAvailable(o.getDescription().toLowerCase(), 1);
             bus.send(GoodNotAvailable);
+            throw new Exception("Merce non disponibile");
         }
     }
 }

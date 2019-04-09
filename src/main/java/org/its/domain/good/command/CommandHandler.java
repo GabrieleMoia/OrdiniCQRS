@@ -32,39 +32,36 @@ public class CommandHandler {
 
     private void handle(ReserveGood o) throws Exception {
         EventController controller = new EventController();
+        GoodReserved reserved;
         List<Good> goods = controller.getGoods();
         if (!goods.isEmpty()) {
-            Good good = goodDao.getById(o.getDescription());
+            Good good = goodDao.getById(o.getDescription().toLowerCase());
             boolean checked = false;
             if (good != null) {
                 if (good.getQuantità() > 0) {
                     good.setQuantità(good.getQuantità() - 1);
                     goodDao.update(good);
                     checked = true;
-                } else {
-                    throw new Exception("Merce non disponibile");
                 }
-            } else {
-                throw new Exception("Merce non disponibile");
             }
             //quando blocco una merce, richiamo l'evento sul blocco delle merci. In ascolto c'è l'istanza sul event handler
-            GoodReserved reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription(), checked);
+            reserved = new GoodReserved(o.getRowId(), o.getOrderId(), o.getDescription().toLowerCase(), checked);
             bus.send(reserved);
         } else {
-            throw new Exception("Merce non disponibile");
+            throw new Exception("Merci non disponibile");
         }
     }
 
     private void handle(AddGood o) {
-        Good oldGood = goodDao.getById(o.getDescription());
+        Good oldGood = goodDao.getById(o.getDescription().toLowerCase());
         Good good = new Good();
 
         if (null == oldGood) {
-            good.setDescrizione(o.getDescription());
+            good.setDescrizione(o.getDescription().toLowerCase());
             good.setQuantità(o.getQuantity());
             goodDao.save(good);
         } else {
-            good.setDescrizione(o.getDescription());
+            good.setDescrizione(o.getDescription().toLowerCase());
             good.setQuantità(o.getQuantity() + oldGood.getQuantità());
             goodDao.update(good);
         }
