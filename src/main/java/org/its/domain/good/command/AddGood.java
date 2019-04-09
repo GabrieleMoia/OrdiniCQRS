@@ -5,12 +5,13 @@ import org.its.bus.BusMessage;
 public class AddGood implements BusMessage {
     private String description;
     private long quantity;
+    private double valore;
 
     public AddGood() {
 
     }
 
-    public AddGood(String description, long quantity) {
+    public AddGood(String description, long quantity, double valore) {
         this.description = description;
         this.quantity = quantity;
     }
@@ -29,5 +30,13 @@ public class AddGood implements BusMessage {
 
     public void setQuantity(long quantity) {
         this.quantity = quantity;
+    }
+
+    public double getValore() {
+        return valore;
+    }
+
+    public void setValore(double valore) {
+        this.valore = valore;
     }
 }

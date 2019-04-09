@@ -59,6 +59,7 @@ public class CommandHandler {
         if (null == oldGood) {
             good.setDescrizione(o.getDescription().toLowerCase());
             good.setQuantità(o.getQuantity());
+            good.setValore(o.getValore());
             goodDao.save(good);
         } else {
             good.setDescrizione(o.getDescription().toLowerCase());

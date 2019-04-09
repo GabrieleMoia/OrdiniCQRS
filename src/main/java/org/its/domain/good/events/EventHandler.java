@@ -36,10 +36,9 @@ public class EventHandler {
             EventRowOrder orderRow = new EventRowOrder();
             orderRow.setIdOrdine(o.getOrderId());
             orderRow.setDescrizione(o.getDescription());
-            orderRow.setValore(rowOrder.getValore());
             orderRow.setIdProgressivo(o.getRowId());
             orderDao.update(order);
-            EventRowOrder eventRowOrder = new EventRowOrder(o.getOrderId(), o.getRowId(), o.getDescription(), rowOrder.getValore());
+            EventRowOrder eventRowOrder = new EventRowOrder(o.getOrderId(), o.getRowId(), o.getDescription());
             bus.send(eventRowOrder);
         } else {
             orderDao.deleteRow(order, o.getRowId());

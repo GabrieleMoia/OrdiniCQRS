@@ -45,7 +45,7 @@ public class CommandHandler {
             id = order.getOrderRows().size();
         }
 
-        RowOrder newRow = new RowOrder(id, o.getDescrizione(), o.getValore());
+        RowOrder newRow = new RowOrder(id, o.getDescrizione());
         order.getOrderRows().add(newRow);
         orderDao.update(order);
         ReserveGood reserveGood = new ReserveGood(id, o.getIdOrdine(),o.getDescrizione());

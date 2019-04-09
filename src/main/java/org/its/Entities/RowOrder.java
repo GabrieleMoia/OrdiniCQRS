@@ -3,16 +3,15 @@ package org.its.Entities;
 public class RowOrder {
     private int idProgressivo;
     private String descrizione;
-    private double valore;
     private boolean reserved;
-    public RowOrder(){
+
+    public RowOrder() {
 
     }
 
-    public RowOrder(int idProgressivo, String descrizione, double valore) {
+    public RowOrder(int idProgressivo, String descrizione) {
         this.idProgressivo = idProgressivo;
         this.descrizione = descrizione;
-        this.valore = valore;
     }
 
     public int getIdProgressivo() {
@@ -29,14 +28,6 @@ public class RowOrder {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
-    }
-
-    public double getValore() {
-        return valore;
-    }
-
-    public void setValore(double valore) {
-        this.valore = valore;
     }
 
     public boolean isReserved() {

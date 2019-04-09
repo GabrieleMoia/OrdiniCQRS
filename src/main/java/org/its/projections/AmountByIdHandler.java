@@ -1,6 +1,8 @@
 package org.its.projections;
 
+import org.its.Entities.Good;
 import org.its.bus.Bus;
+import org.its.domain.good.dao.GoodDao;
 import org.its.domain.order.events.EventOrder;
 import org.its.domain.order.events.EventRowOrder;
 import org.its.projections.dao.AmountByIdDAO;
@@ -13,7 +15,9 @@ public class AmountByIdHandler {
 
     public AmountByIdHandler(
             AmountByIdDAO dao,
+            GoodDao goodDao,
             Bus bus) {
+        this.goodDao = goodDao;
         this.dao = dao;
         this.bus = bus;
         this.bus.register(EventOrder.class,
@@ -25,7 +29,8 @@ public class AmountByIdHandler {
     private void handle(EventRowOrder o) {
         AmountById amountById = new AmountById();
         amountById.setIdOrdine(o.getIdOrdine());
-        amountById.setAmount(o.getValore());
+        Good goodFound = goodDao.getById(o.getDescrizione());
+        amountById.setAmount(goodFound.getValore());
         dao.update(amountById);
     }
 
@@ -38,4 +43,5 @@ public class AmountByIdHandler {
 
     private final AmountByIdDAO dao;
     private final Bus bus;
+    private final GoodDao goodDao;
 }

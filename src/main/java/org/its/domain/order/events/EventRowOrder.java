@@ -8,13 +8,11 @@ public class EventRowOrder implements BusMessage {
     private UUID idOrdine;
     private int idProgressivo;
     private String descrizione;
-    private double valore;
 
-    public EventRowOrder(UUID idOrdine, int idProgressivo, String descrizione, double valore) {
+    public EventRowOrder(UUID idOrdine, int idProgressivo, String descrizione) {
         this.idOrdine = idOrdine;
         this.idProgressivo = idProgressivo;
         this.descrizione = descrizione;
-        this.valore = valore;
     }
 
     public EventRowOrder() {
@@ -45,11 +43,4 @@ public class EventRowOrder implements BusMessage {
         this.descrizione = descrizione;
     }
 
-    public double getValore() {
-        return valore;
-    }
-
-    public void setValore(double valore) {
-        this.valore = valore;
-    }
 }
