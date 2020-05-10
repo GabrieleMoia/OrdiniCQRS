@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7d824004-e273-493b-8c81-7f93e96cb99c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>description</find>
+      <find>quantity</find>
+      <find>chec</find>
+      <find>checked</find>
+      <find>setReserved</find>
+      <find>descrizione</find>
+      <find>GoodCount</find>
+      <find>GoodNotAvailable</find>
+      <find>EventRowOrder</find>
+      <find>GoodReserved</find>
+      <find>GoodAdded</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>descrizione</replace>
+      <replace>quantità</replace>
+      <replace>Reserved</replace>
+      <replace>reserved</replace>
+      <replace>GoodNotAvailable</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/src/main/java/org/its/domain/order/command</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectId" id="1bibRbRj2m7POFhIM3YO3ZIy1mK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554885680895" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="SpringBootWebApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SpringBootWebApp" />
+      <module name="OrdiniCQRS" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SpringBootWebApp" />
+        <item itemvalue="Application.SpringBootWebApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7d824004-e273-493b-8c81-7f93e96cb99c" name="Default Changelist" comment="" />
+      <created>1553245916282</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553245916282</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Aggiunta gestione degli ordini non disponibili">
+      <created>1553863241051</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1553863241051</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Aggiunto controllo disponibiltà con API e lascio d'eccezione">
+      <created>1553863938798</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1553863938798</updated>
+    </task>
+    <task id="LOCAL-00003" summary="aggiunto lowercase per le merci">
+      <created>1554832668676</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554832668676</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Aggiunto valore alla merce">
+      <created>1554847356616</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1554847356616</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Modifica percorso command e event">
+      <created>1553702351075</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1553702351075</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Aggiunta gestione degli ordini non disponibili" />
+    <MESSAGE value="Aggiunto controllo disponibiltà con API e lascio d'eccezione" />
+    <MESSAGE value="aggiunto lowercase per le merci" />
+    <MESSAGE value="Aggiunto valore alla merce" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunto valore alla merce" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1638" height="364" key="GridCell.Tab.0.bottom" timestamp="1589122475513">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="364" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1589122475513" />
+    <state width="1638" height="364" key="GridCell.Tab.0.center" timestamp="1589122475512">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="364" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1589122475512" />
+    <state width="1638" height="364" key="GridCell.Tab.0.left" timestamp="1589122475512">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="364" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1589122475512" />
+    <state width="1638" height="364" key="GridCell.Tab.0.right" timestamp="1589122475513">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="364" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1589122475513" />
+    <state x="637" y="234" key="RollbackChangesDialog" timestamp="1589121454817">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="637" y="234" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1589121454817" />
+    <state x="631" y="446" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589122436677">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="631" y="446" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1680.1050@0.0.1680.1050" timestamp="1589122436677" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/its/domain/order/dao/OrderDaoImpl.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/its/projections/GoodNotAvailableHandler.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/its/projections/dao/GoodNotAvailableDaoImpl.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/its/projections/GoodNotAvailableHandler.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/its/projections/dao/GoodNotAvailableDaoImpl.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
